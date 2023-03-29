@@ -1,19 +1,25 @@
-import { createEffect, createMemo, createSignal } from "solid";
+import { createSignal, createEffect, createMemo } from "solid";
 
-const [getCount, setCount] = createSignal(0);
-const double = createMemo(() => getCount() * 2);
+const [count, setCount] = createSignal(0);
+const doubleCount = () => count() * 2;
+const isDivisibleByThree = createMemo(() => count() % 3 === 0);
 
 createEffect(() => {
-  console.log("count changed", getCount());
-  document.querySelector("#count").textContent = getCount();
+  console.log("count changed", count());
+  document.querySelector("#count").textContent = count();
 });
 
 createEffect(() => {
-  console.log("double changed", double());
-  document.querySelector("#double").textContent = double();
+  console.log("doubleCount changed", doubleCount());
+  document.querySelector("#double").textContent = doubleCount();
+});
+
+createEffect(() => {
+  console.log("isDivisibleByThree changed", isDivisibleByThree());
+  document.querySelector("#divisibleByThree").textContent =
+    isDivisibleByThree();
 });
 
 document.querySelector("button").addEventListener("click", () => {
-  const number = Number(document.querySelector("#number").value);
-  setCount(getCount() + number);
+  setCount(count() + 1);
 });
