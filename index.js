@@ -1,8 +1,8 @@
-import { createSignal, createEffect } from "solid";
+import { createSignal, createEffect, createMemo } from "solid";
 
 const [count, setCount] = createSignal(0);
 const doubleCount = () => count() * 2;
-const isDivisibleByThree = () => count() % 3 === 0;
+const isDivisibleByThree = createMemo(() => count() % 3 === 0);
 
 createEffect(() => {
   console.log("count changed", count());

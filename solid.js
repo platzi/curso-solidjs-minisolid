@@ -22,3 +22,13 @@ export function createEffect(fn) {
   fn();
   context.pop();
 }
+
+export function createMemo(fn) {
+  const [signal, setSignal] = createSignal();
+  createEffect(() => {
+    const value = fn();
+
+    if (value !== signal()) setSignal(fn());
+  });
+  return signal;
+}
