@@ -3,10 +3,13 @@ import { createSignal, createEffect } from "solid";
 const [count, setCount] = createSignal(0);
 
 createEffect(() => {
-  console.log("count changed", count());
+  console.log("count", count());
+});
+
+createEffect(() => {
   document.querySelector("#count").textContent = count();
 });
 
 document.querySelector("button").addEventListener("click", () => {
-  setCount(count() + 1);
+  setCount((c) => c + 1);
 });
