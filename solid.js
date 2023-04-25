@@ -10,6 +10,7 @@ export function createSignal(value) {
   };
 
   const write = (newValue) => {
+    if (typeof newValue === "function") newValue = newValue(value);
     value = newValue;
     subscriptions.forEach((observer) => observer());
   };

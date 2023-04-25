@@ -21,5 +21,5 @@ createEffect(() => {
 });
 
 document.querySelector("button").addEventListener("click", () => {
-  setCount(count() + 1);
+  setCount((c) => c + 1);
 });
